@@ -1,8 +1,9 @@
-import { Schema } from "mongoose";
+import mongoose, { Schema } from "mongoose";
+import { handleMongooseError } from "../../helpers/handleMongooseError.js";
 
 const conversationSchema = new Schema(
   {
-    pasricipants: [
+    participants: [
       {
         type: Schema.Types.ObjectId,
         ref: "User",
@@ -19,7 +20,5 @@ const conversationSchema = new Schema(
   { timestamps: true }
 );
 
-const Conversation = mongoose.model("Conversation", messageSchema);
-messageSchema.post("save", handleMongooseError);
-
-export default Conversation;
+export const Conversation = mongoose.model("Conversation", conversationSchema);
+conversationSchema.post("save", handleMongooseError);

@@ -1,5 +1,5 @@
 import mongoose, { Schema } from "mongoose";
-import { handleMongooseError } from "../../helpers/handleMongooseError";
+import { handleMongooseError } from "../../helpers/handleMongooseError.js";
 
 const messageSchema = new Schema(
   {
@@ -21,7 +21,5 @@ const messageSchema = new Schema(
   { timestamps: true, versionKey: false }
 );
 
-const Message = mongoose.model("Message", messageSchema);
+export const Message = mongoose.model("Message", messageSchema);
 messageSchema.post("save", handleMongooseError);
-
-export default Message;
