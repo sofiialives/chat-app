@@ -1,9 +1,11 @@
 import express from "express";
 import dotenv from "dotenv";
-import authRouter from "./routes/auth/authRoute.js";
+import cookieParser from "cookie-parser";
 import logger from "morgan";
 import cors from "cors";
 import { connectDb } from "./db/connect.js";
+import authRouter from "./routes/authRoute.js";
+import messageRouter from "./routes/messageRoute.js";
 
 dotenv.config();
 
@@ -13,8 +15,10 @@ const formatsLogger = app.get("env") === "development" ? "dev" : "short";
 
 app.use(logger(formatsLogger));
 app.use(express.json());
+app.use(cookieParser());
 app.use(cors());
 app.use("/auth", authRouter);
+app.use("/auth", messageRouter);
 
 app.use((req, res) => {
   res.status(404).json({ message: "Not found" });

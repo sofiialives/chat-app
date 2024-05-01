@@ -29,7 +29,7 @@ const userSchema = new Schema(
       default: "",
     },
   },
-  { versionKey: false }
+  { versionKey: false, timestamps: true }
 );
 
 userSchema.methods.hashPassword = async function () {
