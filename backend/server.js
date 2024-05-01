@@ -6,6 +6,7 @@ import cors from "cors";
 import { connectDb } from "./db/connect.js";
 import authRouter from "./routes/authRoute.js";
 import messageRouter from "./routes/messageRoute.js";
+import userRouter from "./routes/userRoute.js";
 
 dotenv.config();
 
@@ -19,6 +20,7 @@ app.use(cookieParser());
 app.use(cors());
 app.use("/auth", authRouter);
 app.use("/messages", messageRouter);
+app.use("/users", userRouter);
 
 app.use((req, res) => {
   res.status(404).json({ message: "Not found" });
