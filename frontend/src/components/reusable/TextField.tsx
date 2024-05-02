@@ -3,43 +3,38 @@ import cn from "../../utils/cn";
 import { VariantProps, cva } from "class-variance-authority";
 
 interface TextFieldProps
-  extends Omit<InputHTMLAttributes<HTMLInputElement>, "size">,
-    VariantProps<typeof inputVariants> {
+  extends InputHTMLAttributes<HTMLInputElement>,
+    VariantProps<typeof inputVariant> {
   label?: string;
-  onChange?: () => void;
 }
 
 export default function TextField({
-  size,
-  variant,
   className,
-  onChange,
+  variant,
   label,
   ...rest
 }: TextFieldProps) {
   return (
     <div>
-      {label && <label>{label}</label>}
-      <input
-        className={cn(inputVariants({ className, size, variant }))}
-        onChange={onChange}
-        {...rest}
-      />
+      {label && (
+        <label className="label p-2 text-base label-text text-gray-300">
+          {label}
+        </label>
+      )}
+      <input {...rest} className={cn(inputVariant({ variant, className }))} />
     </div>
   );
 }
 
-const inputVariants = cva("", {
+const inputVariant = cva("input input-bordered w-full", {
   variants: {
     variant: {
-      primary: "",
-    },
-    size: {
-      md: "",
+      form: "h-10",
+      radio: "",
+      message: "",
     },
   },
   defaultVariants: {
-    variant: "primary",
-    size: "md",
+    variant: "form",
   },
 });
