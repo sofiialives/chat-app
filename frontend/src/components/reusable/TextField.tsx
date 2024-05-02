@@ -21,7 +21,7 @@ export default function TextField({
           {label}
         </label>
       )}
-      <input {...rest} className={cn(inputVariant({ variant, className }))} />
+      <input className={cn(inputVariant({ variant, className }))} {...rest}/>
     </div>
   );
 }
