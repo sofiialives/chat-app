@@ -17,19 +17,19 @@ export default function TextField({
   return (
     <div>
       {label && (
-        <label className="label p-2 text-base label-text text-gray-300">
+        <label className="label p-0 mb-2 tablet:mb-3 text-base tablet:text-lg label-text text-gray-300">
           {label}
         </label>
       )}
-      <input className={cn(inputVariant({ variant, className }))} {...rest}/>
+      <input className={cn(inputVariant({ variant, className }))} {...rest} />
     </div>
   );
 }
 
-const inputVariant = cva("input input-bordered w-full", {
+const inputVariant = cva("input input-bordered", {
   variants: {
     variant: {
-      form: "h-10",
+      form: "h-10 w-[260px] tablet:w-[600px]",
       radio: "",
       message: "",
     },

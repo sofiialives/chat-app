@@ -31,7 +31,7 @@ const buttonVariants = cva("btn", {
       auth: "btn-block mt-2",
     },
     size: {
-      sm: "btn-sm",
+      sm: "btn-sm tablet:btn-md",
       md: "",
     },
   },
