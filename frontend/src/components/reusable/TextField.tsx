@@ -29,12 +29,13 @@ export default function TextField({
 const inputVariant = cva("input input-bordered", {
   variants: {
     variant: {
-      form: "h-10 w-[260px] tablet:w-[600px]",
+      auth: "h-10 w-[260px] tablet:w-[600px]",
       sidebar: "rounded-full",
-      message: "",
+      message:
+        "text-sm border rounded-lg block w-full p-2.5 bg-purple-500 border-gray-600 text-white",
     },
   },
   defaultVariants: {
-    variant: "form",
+    variant: "auth",
   },
 });
