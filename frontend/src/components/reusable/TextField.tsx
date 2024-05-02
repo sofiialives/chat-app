@@ -30,7 +30,7 @@ const inputVariant = cva("input input-bordered", {
   variants: {
     variant: {
       form: "h-10 w-[260px] tablet:w-[600px]",
-      radio: "",
+      sidebar: "rounded-full",
       message: "",
     },
   },

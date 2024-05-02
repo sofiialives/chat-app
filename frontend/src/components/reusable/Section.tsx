@@ -7,5 +7,14 @@ interface SectionProps {
 }
 
 export default function Section({ className, children }: SectionProps) {
-  return <section className={cn("py-10", className)}>{children}</section>;
+  return (
+    <section
+      className={cn(
+        "flex flex-col items-center justify-center h-screen py-10",
+        className
+      )}
+    >
+      {children}
+    </section>
+  );
 }

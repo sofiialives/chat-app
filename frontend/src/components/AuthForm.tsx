@@ -1,5 +1,6 @@
 import GenderCheckbox from "./GenderCheckbox";
 import Button from "./reusable/Button";
+import Container from "./reusable/Container";
 import TextField from "./reusable/TextField";
 
 interface AuthFormProps {
@@ -9,7 +10,7 @@ interface AuthFormProps {
 
 export default function AuthForm({ register, handleSubmit }: AuthFormProps) {
   return (
-    <div className="p-6 tablet:p-10 rounded-lg bg-gray-400 bg-clip-padding backdrop-filter backdrop-blur-lg bg-opacity-0">
+    <Container className="p-6 tablet:p-10">
       <h1 className="text-3xl font-semibold text-center text-gray-300">
         {register ? "Signup" : "Login"}
       </h1>
@@ -29,6 +30,6 @@ export default function AuthForm({ register, handleSubmit }: AuthFormProps) {
         </a>
         <Button>{register ? "Signup" : "Login"}</Button>
       </form>
-    </div>
+    </Container>
   );
 }
