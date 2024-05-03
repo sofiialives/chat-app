@@ -1,21 +1,21 @@
 import { useState } from "react";
+import toast from "react-hot-toast";
 import { AuthProps } from "../components/AuthForm";
 import { handleInputErrors } from "./handleInputErrors";
-import toast from "react-hot-toast";
 
 const useSignup = () => {
   const [loading, setLoading] = useState(false);
 
   const signup = async ({
-    username,
     email,
+    username,
     password,
     confirmPassword,
     gender,
   }: AuthProps) => {
     const success = handleInputErrors({
-      username,
       email,
+      username,
       password,
       confirmPassword,
       gender,
@@ -37,6 +37,9 @@ const useSignup = () => {
       });
 
       const data = await res.json();
+      if (data.error) {
+        throw new Error(data.error);
+      }
       console.log(data);
     } catch (error) {
       toast.error((error as Error).message);
@@ -47,5 +50,4 @@ const useSignup = () => {
 
   return { loading, signup };
 };
-
 export default useSignup;

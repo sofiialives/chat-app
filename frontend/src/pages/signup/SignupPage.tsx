@@ -1,11 +1,11 @@
 import Section from "../../components/reusable/Section";
-import AuthForm from "../../components/AuthForm";
+import AuthForm, { AuthProps } from "../../components/AuthForm";
 import { useState } from "react";
 import useSignup from "../../hooks/useSignup";
 
 export default function SignupPage() {
   const { signup } = useSignup();
-  const [inputs, setInputs] = useState({
+  const [inputs, setInputs] = useState<AuthProps>({
     username: "",
     email: "",
     password: "",
@@ -16,6 +16,7 @@ export default function SignupPage() {
   const handleSubmit = async (e: { preventDefault: () => void }) => {
     e.preventDefault();
     await signup(inputs);
+    // console.log(inputs);
   };
 
   return (
