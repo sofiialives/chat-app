@@ -10,7 +10,7 @@ export const signup = async (req, res) => {
 
   const user = await User.findOne({ email });
 
-  if (user) throw httpError(400, "Username already exists");
+  if (user) throw httpError(400, "Email in use");
 
   const boyProfilePic = `https://avatar.iran.liara.run/public/boy/?username=${username}`;
   const girlProfilePic = `https://avatar.iran.liara.run/public/girl/?username=${username}`;
