@@ -4,7 +4,7 @@ import { useState } from "react";
 import useSignup from "../../hooks/useSignup";
 
 export default function SignupPage() {
-  const { signup } = useSignup();
+  const { signup, loading } = useSignup();
   const [inputs, setInputs] = useState<AuthProps>({
     username: "",
     email: "",
@@ -16,7 +16,6 @@ export default function SignupPage() {
   const handleSubmit = async (e: { preventDefault: () => void }) => {
     e.preventDefault();
     await signup(inputs);
-    // console.log(inputs);
   };
 
   return (
@@ -26,6 +25,7 @@ export default function SignupPage() {
         inputs={inputs}
         setInputs={setInputs}
         handleSubmit={handleSubmit}
+        loading={loading}
       />
     </Section>
   );

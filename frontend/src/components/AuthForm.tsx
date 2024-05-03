@@ -18,6 +18,7 @@ interface AuthFormProps {
   handleSubmit?: (e: React.FormEvent<HTMLFormElement>) => void;
   inputs: AuthProps;
   setInputs: Dispatch<SetStateAction<AuthProps>>;
+  loading: boolean;
 }
 
 export default function AuthForm({
@@ -25,6 +26,7 @@ export default function AuthForm({
   handleSubmit,
   inputs,
   setInputs,
+  loading,
 }: AuthFormProps) {
   const handleCheckboxChange = (gender: string) => {
     setInputs({ ...inputs, gender });
@@ -81,7 +83,10 @@ export default function AuthForm({
             ? "Already have an account?"
             : `${"Don't"} have an account?`}
         </Link>
-        <Button type="submit">{register ? "Signup" : "Login"}</Button>
+        <Button type="submit" disabled={loading}>
+          {loading && <span className="loading loading-spinner text-primary" />}
+          {register ? "Signup" : "Login"}
+        </Button>
       </form>
     </Container>
   );

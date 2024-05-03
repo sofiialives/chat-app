@@ -1,7 +1,6 @@
 import { useState } from "react";
 import toast from "react-hot-toast";
 import { AuthProps } from "../components/AuthForm";
-import { handleInputErrors } from "./handleInputErrors";
 import { useAuthContext } from "./useAuthContext";
 
 const useSignup = () => {
@@ -53,4 +52,30 @@ const useSignup = () => {
 
   return { loading, signup };
 };
+
 export default useSignup;
+
+function handleInputErrors({
+  email,
+  username,
+  password,
+  confirmPassword,
+  gender,
+}: AuthProps) {
+  if (!email || !username || !password || !confirmPassword || !gender) {
+    toast.error("Please fill in all fields");
+    return false;
+  }
+
+  if (password !== confirmPassword) {
+    toast.error("Passwords do not match");
+    return false;
+  }
+
+  if (password.length < 6) {
+    toast.error("Password must be at least 6 characters");
+    return false;
+  }
+
+  return true;
+}
