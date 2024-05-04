@@ -18,9 +18,9 @@ app.use(logger(formatsLogger));
 app.use(express.json());
 app.use(cookieParser());
 app.use(cors());
-app.use("/auth", authRouter);
-app.use("/messages", messageRouter);
-app.use("/users", userRouter);
+app.use("/api/auth", authRouter);
+app.use("/api/messages", messageRouter);
+app.use("/api/users", userRouter);
 
 app.use((req, res) => {
   res.status(404).json({ message: "Not found" });

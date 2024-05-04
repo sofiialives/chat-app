@@ -1,4 +1,4 @@
-import { create, SetState } from "zustand";
+import { create } from "zustand";
 import { UserProps } from "../components/home/Sidebar/Conversations";
 
 interface ConversationState {
@@ -8,14 +8,12 @@ interface ConversationState {
   setMessages: (messages: []) => void;
 }
 
-const useConversation = create<ConversationState>(
-  (set: SetState<ConversationState>) => ({
-    selectedConversation: null,
-    setSelectedConversation: (selectedConversation: UserProps | null) =>
-      set({ selectedConversation }),
-    messages: [],
-    setMessages: (messages: []) => set({ messages }),
-  })
-);
+const useConversation = create<ConversationState>((set) => ({
+  selectedConversation: null,
+  setSelectedConversation: (selectedConversation: UserProps | null) =>
+    set({ selectedConversation }),
+  messages: [],
+  setMessages: (messages: []) => set({ messages }),
+}));
 
 export default useConversation;
