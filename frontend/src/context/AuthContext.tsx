@@ -1,8 +1,9 @@
 import { createContext, useState } from "react";
+import { UserProps } from "../components/home/Sidebar/Conversations";
 
 interface AuthContextType {
-  authUser: string | null;
-  setAuthUser: React.Dispatch<React.SetStateAction<string | null>>;
+  authUser: UserProps | null;
+  setAuthUser: React.Dispatch<React.SetStateAction<UserProps | null>>;
 }
 
 export const AuthContext = createContext<AuthContextType>({
@@ -16,9 +17,8 @@ interface AuthContextProps {
 
 export default function AuthContextProvider({ children }: AuthContextProps) {
   const storedUser = localStorage.getItem("chat-user");
-  const [authUser, setAuthUser] = useState<string | null>(
-    storedUser !== null ? storedUser : null
-  );
+  const initialAuthUser = storedUser ? JSON.parse(storedUser) : null;
+  const [authUser, setAuthUser] = useState<UserProps | null>(initialAuthUser);
 
   return (
     <AuthContext.Provider value={{ authUser, setAuthUser }}>
