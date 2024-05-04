@@ -7,10 +7,9 @@ import { connectDb } from "./db/connect.js";
 import authRouter from "./routes/authRoute.js";
 import messageRouter from "./routes/messageRoute.js";
 import userRouter from "./routes/userRoute.js";
+import { app, server } from "./socket/socket.js";
 
 dotenv.config();
-
-const app = express();
 
 const formatsLogger = app.get("env") === "development" ? "dev" : "short";
 
@@ -31,7 +30,7 @@ app.use((err, req, res, next) => {
   res.status(status).json({ message });
 });
 
-app.listen(process.env.PORT, async () => {
+server.listen(process.env.PORT, async () => {
   await connectDb();
   console.log("Server is running");
 });
