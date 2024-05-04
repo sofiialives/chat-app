@@ -29,9 +29,12 @@ export const signup = async (req, res) => {
   generateTokenAndSetCookie(newUser._id, res);
   await newUser.save();
 
-  res
-    .status(201)
-    .json({ email, username, profilePicture: newUser.profilePicture });
+  res.status(201).json({
+    _id: newUser._id,
+    email,
+    username,
+    profilePicture: newUser.profilePicture,
+  });
 };
 
 export const login = async (req, res) => {
@@ -45,6 +48,7 @@ export const login = async (req, res) => {
   generateTokenAndSetCookie(user._id, res);
 
   res.json({
+    _id: user._id,
     email,
     username: user.username,
     profilePicture: user.profilePicture,
