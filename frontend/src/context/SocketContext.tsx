@@ -8,7 +8,7 @@ interface SocketContextProps {
 
 interface SocketContextValue {
   socket: Socket | null;
-  onlineUsers: { userId: string }[];
+  onlineUsers: string[];
 }
 
 export const SocketContext = createContext<SocketContextValue>({
@@ -20,7 +20,7 @@ export default function SocketContextProvider({
   children,
 }: SocketContextProps) {
   const [socket, setSocket] = useState<Socket | null>(null);
-  const [onlineUsers, setOnlineUsers] = useState<{ userId: string }[]>([]);
+  const [onlineUsers, setOnlineUsers] = useState<string[]>([]);
   const { authUser } = useAuthContext();
 
   useEffect(() => {
@@ -45,7 +45,8 @@ export default function SocketContextProvider({
         socket.close();
       }
     };
-  }, [authUser, socket]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [authUser]);
 
   return (
     <SocketContext.Provider value={{ socket, onlineUsers }}>
