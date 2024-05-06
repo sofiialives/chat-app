@@ -1,3 +1,4 @@
+import { useSocketContext } from "../../../hooks/useSocketContext";
 import useConversation from "../../../lib/useConversation";
 import cn from "../../../utils/cn";
 import { UserProps } from "./Conversations";
@@ -14,8 +15,10 @@ export default function Conversation({
   lastIndex,
 }: ConversationProps) {
   const { selectedConversation, setSelectedConversation } = useConversation();
+  const { onlineUsers } = useSocketContext();
 
   const isSelected = selectedConversation?._id === conversation._id;
+  const isOnline = onlineUsers.includes(conversation._id);
   return (
     <>
       <div
@@ -25,7 +28,7 @@ export default function Conversation({
         )}
         onClick={() => setSelectedConversation(conversation)}
       >
-        <div className="avatar online">
+        <div className={cn("avatar", isOnline ? "online" : "offline")}>
           <div className="w-12 rounded-full">
             <img src={conversation.profilePicture} alt="user avatar" />
           </div>

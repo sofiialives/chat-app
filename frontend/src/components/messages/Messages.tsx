@@ -2,6 +2,7 @@ import { useEffect, useRef } from "react";
 import useGetMessages from "../../hooks/useGetMessages";
 import Message from "./Message";
 import MessageShadow from "./MessageShadow";
+import useListenMessages from "../../hooks/useListenMessages";
 
 export interface MessageProps {
   _id: string;
@@ -14,6 +15,7 @@ export interface MessageProps {
 
 export default function Messages() {
   const { messages, loading } = useGetMessages();
+  useListenMessages();
   const lastMessageRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
@@ -34,7 +36,9 @@ export default function Messages() {
 
       {loading && [...Array(3)].map((_, idx) => <MessageShadow key={idx} />)}
       {!loading && messages.length === 0 && (
-        <p className="text-center text-gray-300 text-lg font-medium">Send a message to start the conversation</p>
+        <p className="text-center text-gray-300 text-lg font-medium">
+          Send a message to start the conversation
+        </p>
       )}
     </div>
   );
