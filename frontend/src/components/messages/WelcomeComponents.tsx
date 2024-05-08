@@ -2,14 +2,19 @@ import { TiMessages } from "react-icons/ti";
 import { useAuthContext } from "../../hooks/useAuthContext";
 import Button from "../reusable/Button";
 import { GiHamburgerMenu } from "react-icons/gi";
-import { useState } from "react";
+import { Dispatch } from "react";
 import Sidebar from "../home/Sidebar/Sidebar";
 import { RxCross1 } from "react-icons/rx";
 
-interface WelcomeComponentsProps {}
+interface WelcomeComponentsProps {
+  open: boolean;
+  setOpen: Dispatch<React.SetStateAction<boolean>>;
+}
 
-export default function WelcomeComponents({}: WelcomeComponentsProps) {
-  const [open, setOpen] = useState(false);
+export default function WelcomeComponents({
+  open,
+  setOpen,
+}: WelcomeComponentsProps) {
   const { authUser } = useAuthContext();
   return (
     <div className="flex items-center justify-center w-full h-full">
@@ -24,7 +29,7 @@ export default function WelcomeComponents({}: WelcomeComponentsProps) {
             <GiHamburgerMenu className="w-7 h-7 absolute top-2/4 right-0 -translate-x-1/2 -translate-y-1/2" />
           )}
         </Button>
-        {open && <Sidebar open />}
+        {open && <Sidebar open setOpen={setOpen} />}
         <h1>Welcome 😎 {authUser?.username} 📸</h1>
         <p>Select a chat to start messaging</p>
         <TiMessages className="text-3xl tablet:text-6xl text-center" />
