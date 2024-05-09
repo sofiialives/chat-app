@@ -51,3 +51,17 @@ export const updateUserInfo = async (req, res) => {
     },
   });
 };
+
+export const updateAvatar = async (req, res) => {
+  const { _id } = req.user;
+  if (!req.file) throw httpError(400);
+  const avatarURL = req.file.path;
+  const user = await User.findById({ _id });
+
+  if (!user) throw httpError(404);
+
+  user.profilePicture = avatarURL;
+  user.save();
+
+  res.json({ profilePicture: user.profilePicture });
+};
