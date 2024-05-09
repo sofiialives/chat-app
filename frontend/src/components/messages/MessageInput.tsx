@@ -35,11 +35,11 @@ export default function MessageInput({}: MessageInputProps) {
           type="button"
           variant="message"
           onClick={() => setOpenEmoji(!openEmoji)}
-          className="mr-10"
+          className="mr-10 w-[58px] h-[48px]"
         >
           <RiEmojiStickerLine className="w-6 h-6 text-gray-300" />
         </Button>
-        <Button type="submit" variant="message">
+        <Button type="submit" variant="message" className="w-[58px] h-[48px]">
           {loading ? (
             <span className="loading loading-spinner text-primary" />
           ) : (

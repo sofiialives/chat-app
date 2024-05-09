@@ -37,7 +37,7 @@ export default function MessageContainer({}: MessageContainerProps) {
                 <GiHamburgerMenu className="w-7 h-7" />
               )}
             </Button>
-            {!open && <Sidebar open />}
+            {open && <Sidebar open setOpen={setOpen} />}
           </div>
           <Messages />
           <MessageInput />
