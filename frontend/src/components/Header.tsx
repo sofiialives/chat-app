@@ -9,11 +9,17 @@ export default function Header({}: HeaderProps) {
   const { authUser } = useAuthContext();
   return (
     <Container className="flex justify-between items-center py-3">
-      <div>Icon</div>
-      <div className="flex items-center gap-2">
-        <h1 className="text-3xl font-medium text-gray-200">
-          {authUser?.username}
+      <div className="flex gap-2 items-center">
+        <img
+          src="/images/icon.png"
+          alt="app icon"
+          className="w-8 h-12 tablet:w-14 tablet:h-20"
+        />
+        <h1 className="text-purple-300 text-xl tablet:text-3xl font-medium">
+          Lives Chat App
         </h1>
+      </div>
+      <div className="flex items-center gap-1 tablet:gap-3">
         <img
           src={authUser?.profilePicture}
           alt="avatar"
