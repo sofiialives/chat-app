@@ -1,4 +1,4 @@
-import { httpError } from "../helpers/httpError";
+import { httpError } from "../helpers/httpError.js";
 
 export const validateBody = (schema) => {
   const fn = async (req, res, next) => {
@@ -6,6 +6,7 @@ export const validateBody = (schema) => {
     if (error) {
       next(httpError(400));
     }
+    next();
   };
   return fn;
 };
