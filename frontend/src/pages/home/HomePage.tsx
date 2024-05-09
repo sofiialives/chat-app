@@ -6,7 +6,7 @@ import Section from "../../components/reusable/Section";
 export default function HomePage() {
   return (
     <Section>
-      <Container className="flex mobile:h-[480px] tablet:h-[550px] overflow-hidden px-0 tablet:px-0">
+      <Container className="flex justify-center mobile:h-[480px] tablet:h-[550px] desktop:h-[800px] overflow-hidden px-0">
         <Sidebar />
         <MessageContainer />
       </Container>

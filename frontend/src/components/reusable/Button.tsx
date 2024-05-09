@@ -30,7 +30,7 @@ const buttonVariants = cva("btn", {
     variant: {
       auth: "btn-block mt-2",
       sidebar: "btn-circle bg-purple-500 text-white",
-      message: "absolute inset-y-0 end-0 flex items pe-3 btn-ghost",
+      message: "absolute inset-y-0 end-0 flex items-center btn-ghost",
     },
     size: {
       sm: "btn-sm tablet:btn-md",

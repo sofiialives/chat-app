@@ -38,7 +38,7 @@ export default function AuthForm({
       </h1>
       <form
         onSubmit={handleSubmit}
-        className="flex flex-col gap-2 tablet:gap-3"
+        className="flex flex-col justify-center items-center gap-2 tablet:gap-3"
       >
         {register && (
           <TextField
@@ -83,7 +83,11 @@ export default function AuthForm({
             ? "Already have an account?"
             : `${"Don't"} have an account?`}
         </Link>
-        <Button type="submit" disabled={loading}>
+        <Button
+          type="submit"
+          disabled={loading}
+          className="w-[260px] tablet:w-[600px]"
+        >
           {loading && <span className="loading loading-spinner text-primary" />}
           {register ? "Signup" : "Login"}
         </Button>
