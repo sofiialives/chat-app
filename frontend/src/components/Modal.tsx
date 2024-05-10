@@ -32,7 +32,7 @@ export default function Modal({ children, title, setIsOpen }: ModalProps) {
       className="bg-black bg-opacity-30 w-full h-full fixed top-0 left-0 z-50"
       onClick={handleBackdropClick}
     >
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[280px] h-auto max-w-[90%] bg-white rounded-lg overflow-auto px-8 py-6">
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 h-auto max-w-[90%] bg-white rounded-lg overflow-auto px-8 py-6">
         <div onClick={() => setIsOpen(false)}>Close</div>
         <div>
           <div>

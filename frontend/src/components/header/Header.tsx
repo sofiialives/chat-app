@@ -3,6 +3,7 @@ import Container from "../reusable/Container";
 import { IoSettingsOutline } from "react-icons/io5";
 import Modal from "../Modal";
 import { useState } from "react";
+import ModalSettings from "./modal/ModalSettings";
 
 interface HeaderProps {}
 
@@ -35,7 +36,7 @@ export default function Header({}: HeaderProps) {
         />
         {isOpen && (
           <Modal setIsOpen={setIsOpen} title="Hello">
-            dsf
+            <ModalSettings />
           </Modal>
         )}
       </div>
