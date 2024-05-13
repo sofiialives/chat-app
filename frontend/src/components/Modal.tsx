@@ -1,9 +1,11 @@
 import { SetStateAction, useEffect } from "react";
+import { RxCross1 } from "react-icons/rx";
 
 interface ModalProps {
   title: string;
   children: React.ReactNode;
   setIsOpen: React.Dispatch<SetStateAction<boolean>>;
+  open: boolean;
 }
 
 export default function Modal({ children, title, setIsOpen }: ModalProps) {
@@ -32,10 +34,15 @@ export default function Modal({ children, title, setIsOpen }: ModalProps) {
       onClick={handleBackdropClick}
     >
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 h-auto max-w-[90%] bg-white rounded-lg overflow-auto px-8 py-6">
-        <div onClick={() => setIsOpen(false)}>Close</div>
+        <div
+          onClick={() => setIsOpen(false)}
+          className="absolute right-4 top-4"
+        >
+          <RxCross1 className="tablet:w-7 tablet:h-7" />
+        </div>
         <div>
           <div>
-            <h1>{title}</h1>
+            <h1 className="font-medium text-xl text-center mb-4">{title}</h1>
           </div>
           <div>{children}</div>
         </div>

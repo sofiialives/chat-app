@@ -36,12 +36,11 @@ export default function AvatarForm({ setFile, file }: AvatarFormProps) {
   };
 
   return (
-    <div>
-      <h1>Your Profile Photo</h1>
-      <label>
+    <div className="text-center tablet:text-start">
+      <label className="flex flex-col items-center tablet:items-start gap-2 mt-2">
         <img
           src={previewURL ? previewURL : file}
-          className="w-20 h-20"
+          className="w-20 h-20 rounded-full"
           alt="User avatar"
         />
         <TextField

@@ -28,14 +28,14 @@ export default function Header({}: HeaderProps) {
           alt="avatar"
           width={40}
           height={40}
-          className="tablet:w-12 tablet:h-12"
+          className="tablet:w-16 tablet:h-16 rounded-full"
         />
         <IoSettingsOutline
-          className="w-10 h-10 tablet:w-12 tablet:h-12 text-gray-300"
+          className="w-10 h-10 tablet:w-16 tablet:h-16 text-gray-300"
           onClick={() => setIsOpen(true)}
         />
         {isOpen && (
-          <Modal setIsOpen={setIsOpen} title="Hello">
+          <Modal setIsOpen={setIsOpen} title="User Settings" open={isOpen}>
             <ModalSettings />
           </Modal>
         )}
