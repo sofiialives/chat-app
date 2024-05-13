@@ -1,5 +1,4 @@
 import { SetStateAction, useEffect } from "react";
-import Button from "./reusable/Button";
 
 interface ModalProps {
   title: string;
@@ -39,9 +38,6 @@ export default function Modal({ children, title, setIsOpen }: ModalProps) {
             <h1>{title}</h1>
           </div>
           <div>{children}</div>
-          <div>
-            <Button>Save</Button>
-          </div>
         </div>
       </div>
     </div>

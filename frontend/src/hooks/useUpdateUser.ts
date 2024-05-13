@@ -1,6 +1,13 @@
 import { useState } from "react";
-import { useAuthContext } from "./useAuthContext";
 import toast from "react-hot-toast";
+import { useAuthContext } from "./useAuthContext";
+
+interface UserDataToUpdate {
+  username?: string;
+  password?: string;
+  newPassword?: string;
+  gender?: string;
+}
 
 const useUpdateUser = () => {
   const [loading, setLoading] = useState(false);
@@ -11,12 +18,12 @@ const useUpdateUser = () => {
     password,
     gender,
     newPassword,
-  }: {
-    username: string;
-    password: string;
-    gender: string;
-    newPassword: string;
-  }) => {
+  }: UserDataToUpdate) => {
+    const dataToUpdate: UserDataToUpdate = {
+      username,
+      gender,
+    };
+
     const success = handleInputErrors({ password, newPassword });
     if (!success) return;
     setLoading(true);
@@ -24,15 +31,23 @@ const useUpdateUser = () => {
       const res = await fetch("/api/users/update-info", {
         method: "PATCH",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ username, password, newPassword, gender }),
+        body: JSON.stringify(dataToUpdate),
       });
 
       const data = await res.json();
       if (data.error) {
         throw new Error(data.error);
       }
-      localStorage.setItem("chat-user", JSON.stringify(data));
-      setAuthUser(data);
+
+      const chatUserData = JSON.parse(
+        localStorage.getItem("chat-user") || "{}"
+      );
+
+      localStorage.setItem(
+        "chat-user",
+        JSON.stringify({ ...chatUserData, ...dataToUpdate })
+      );
+      setAuthUser({ ...chatUserData, ...dataToUpdate });
     } catch (error) {
       toast.error((error as Error).message);
     } finally {
@@ -45,17 +60,10 @@ const useUpdateUser = () => {
 
 export default useUpdateUser;
 
-function handleInputErrors({
-  newPassword,
-  password,
-}: {
-  newPassword: string;
-  password: string;
-}) {
-  if (newPassword === password) {
+function handleInputErrors({ newPassword, password }: UserDataToUpdate) {
+  if (password && newPassword === password) {
     toast.error("Fill in new password");
     return false;
   }
-
   return true;
 }

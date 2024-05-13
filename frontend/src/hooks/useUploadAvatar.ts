@@ -1,27 +1,31 @@
 import { useState } from "react";
-import { useAuthContext } from "./useAuthContext";
 import toast from "react-hot-toast";
+import { useAuthContext } from "./useAuthContext";
 
 const useUploadAvatar = () => {
   const [loading, setLoading] = useState(false);
   const { setAuthUser } = useAuthContext();
 
-  const uploadAvatar = async (profilePicture: string) => {
+  const uploadAvatar = async (file: File | null) => {
     setLoading(true);
     try {
       const res = await fetch("/api/users/avatars", {
         method: "PATCH",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          profilePicture,
-        }),
+        body: JSON.stringify({ profilePicture: file }),
       });
 
-      const data = await res.json();
-      if (data.error) {
-        throw new Error(data.eror);
+      if (!res.ok) {
+        throw new Error("Failed to upload avatar");
       }
-      localStorage.setItem("chat-user", JSON.stringify(data));
+
+      const data = await res.json();
+      const chatUserData = JSON.parse(
+        localStorage.getItem("chat-user") || "{}"
+      );
+
+      setAuthUser({ ...chatUserData, data });
+      toast.success("Avatar uploaded successfully");
     } catch (error) {
       toast.error((error as Error).message);
     } finally {

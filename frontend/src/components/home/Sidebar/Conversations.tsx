@@ -9,6 +9,7 @@ export interface UserProps {
   email: string;
   username: string;
   profilePicture: string;
+  gender: string;
 }
 
 export default function Conversations({}: ConversationsProps) {

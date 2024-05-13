@@ -1,16 +1,14 @@
 import { ChangeEvent, useState } from "react";
-import { useAuthContext } from "../../../hooks/useAuthContext";
 import TextField from "../../reusable/TextField";
-import { BsArrowUp } from "react-icons/bs";
 import toast from "react-hot-toast";
 
 interface AvatarFormProps {
   setFile: (file: File) => void;
+  file: string;
 }
 
-export default function AvatarForm({ setFile }: AvatarFormProps) {
+export default function AvatarForm({ setFile, file }: AvatarFormProps) {
   const [previewURL, setPreviewURL] = useState<string | null>(null);
-  const { authUser } = useAuthContext();
 
   const onChangeFile = (e: ChangeEvent<HTMLInputElement>) => {
     const files = e.target.files;
@@ -36,12 +34,13 @@ export default function AvatarForm({ setFile }: AvatarFormProps) {
       reader.readAsDataURL(selectedFile);
     }
   };
+
   return (
     <div>
       <h1>Your Profile Photo</h1>
       <label>
         <img
-          src={previewURL ? previewURL : authUser?.profilePicture}
+          src={previewURL ? previewURL : file}
           className="w-20 h-20"
           alt="User avatar"
         />
@@ -51,10 +50,6 @@ export default function AvatarForm({ setFile }: AvatarFormProps) {
           accept=".jpeg,.jpg,.png,.webp"
           onChange={onChangeFile}
         />
-        <BsArrowUp />
-        {/* {loading && (
-          <span className="loading loading-spinner text-primary mx-auto" />
-        )} */}
       </label>
     </div>
   );

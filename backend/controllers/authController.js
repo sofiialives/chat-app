@@ -33,6 +33,7 @@ export const signup = async (req, res) => {
     _id: newUser._id,
     email,
     username,
+    gender,
     profilePicture: newUser.profilePicture,
   });
 };
@@ -51,6 +52,7 @@ export const login = async (req, res) => {
     _id: user._id,
     email,
     username: user.username,
+    gender: user.gender,
     profilePicture: user.profilePicture,
   });
 };

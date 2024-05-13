@@ -18,6 +18,10 @@ const registerSchema = Joi.object({
     .required()
     .min(6)
     .messages({ "any.required": "missing required password field" }),
+  confirmPassword: Joi.string()
+    .required()
+    .min(6)
+    .messages({ "any.required": "missing required password field" }),
 });
 
 const loginSchema = Joi.object({
