@@ -1,4 +1,5 @@
 import { User } from "../db/models/userModel.js";
+import { httpError } from "../helpers/httpError.js";
 
 export const getUsersForSidebar = async (req, res) => {
   const { _id: loggedInUserId } = req.user;
@@ -8,4 +9,59 @@ export const getUsersForSidebar = async (req, res) => {
   );
 
   return res.json(filterUsers);
+};
+
+export const updateUserInfo = async (req, res) => {
+  const { _id } = req.user;
+  const { gender, username, password, newPassword } = req.body;
+
+  let updatedUser;
+
+  if (password && newPassword) {
+    if (password === newPassword) throw httpError(401);
+
+    const user = await User.findById({ _id });
+    if (!user) throw httpError(401);
+
+    updatedUser = await User.findByIdAndUpdate(
+      _id,
+      {
+        username,
+        gender,
+        password: newPassword,
+      },
+      { new: true }
+    );
+
+    await updatedUser.hashPassword();
+    await updatedUser.save();
+  } else {
+    updatedUser = await User.findByIdAndUpdate(
+      _id,
+      { username, gender },
+      { new: true }
+    );
+    if (!updatedUser) throw httpError(404);
+  }
+
+  res.json({
+    user: {
+      username: updatedUser.username,
+      gender: updatedUser.gender,
+    },
+  });
+};
+
+export const updateAvatar = async (req, res) => {
+  const { _id } = req.user;
+  if (!req.file) throw httpError(400);
+  const avatarURL = req.file.path;
+  const user = await User.findById({ _id });
+
+  if (!user) throw httpError(404);
+
+  user.profilePicture = avatarURL;
+  user.save();
+
+  res.json({ profilePicture: user.profilePicture });
 };

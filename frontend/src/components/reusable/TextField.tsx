@@ -31,6 +31,7 @@ const inputVariant = cva("input input-bordered", {
     variant: {
       auth: "h-10 w-[260px] tablet:w-[600px]",
       sidebar: "rounded-full w-[136px] tablet:w-[215px]",
+      modal: "w-[200px] tablet:w-[300px]",
       message:
         "text-sm border rounded-lg block w-full p-2.5 bg-purple-500 border-gray-600 text-white",
     },

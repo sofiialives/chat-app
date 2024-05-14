@@ -10,6 +10,7 @@ export interface AuthProps {
   email: string;
   password: string;
   confirmPassword?: string;
+  newPassword?: string;
   gender?: string;
 }
 
